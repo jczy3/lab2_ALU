@@ -1,11 +1,11 @@
 //=========================================================================
 // Name & Email must be EXACTLY as in Gradescope roster!
-// Name: 
-// Email: 
+// Name: Joseph Caraan
+// Email: jcara025@ucr.edu
 // 
-// Assignment name: 
-// Lab section: 
-// TA: 
+// Assignment name: Lab 2 ALU
+// Lab section: 25
+// TA: Sakshar Chakravarty
 // 
 // I hereby certify that I have not received assistance on this assignment,
 // or used code, from ANY outside source other than the instruction team
@@ -23,7 +23,7 @@
 `define ALU_OR          4'b0001
 `define ALU_ADD         4'b0010
 `define ALU_SUBTRACT    4'b0110
-`define ALU_LESS_THAN   4'b0111
+`define ALU_LESS_THAN   4'b0111     //result <= $signed(A) < $signed(B)
 `define ALU_NOR         4'b1100
   
 `define FUNCT_AND       6'b100100
@@ -49,7 +49,19 @@ module alu (
 // --------------------------------------------------------- 
 
 always @(alu_control or A or B) begin
+    //case statement
     // Put our code here
+    case (alu_control)
+        4'b0000 : result = A & B;
+        4'b0001 : result = A | B;
+        4'b0010 : result = $signed(A) + $signed(B);
+        4'b0110 : result = $signed(A) - $signed(B);
+        4'b0111 : result = $signed(A) < $signed(B);
+        4'b1100 : result = ~(A | B);
+        default : result = 0;
+    endcase
+    if (result == 0) zero = 1;
+    else zero = 0;
 end 
 
 endmodule

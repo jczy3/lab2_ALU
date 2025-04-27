@@ -1,11 +1,11 @@
 //=========================================================================
 // Name & Email must be EXACTLY as in Gradescope roster!
-// Name: 
-// Email: 
+// Name: Joseph Caraan
+// Email: jcara025@ucr.edu
 // 
-// Assignment name: 
-// Lab section: 
-// TA: 
+// Assignment name: Lab 2 ALU
+// Lab section: 25
+// TA: Sakshar Chakravarty
 // 
 // I hereby certify that I have not received assistance on this assignment,
 // or used code, from ANY outside source other than the instruction team
@@ -115,10 +115,29 @@ module myalu_tb;
         // --------------------------------------------- 
 
         // Code necessary for each test case 
-        $write("\tTest Case 1: And ... ");
-        test_case(2, 6'h24, 32'h1111, 32'hffff, 1'b0, 32'h1111);
+        $write("\tTest Case 1: AND");
+        test_case(1, 6'h24, 32'h1111, 32'hffff, 1'b0, 32'h1111);
 
         // Copy the code above and change params to do tests from table        
+        // OR
+        $write("\tTest Case 2: OR");
+        test_case(2, 6'h25, 32'h0000_FF00, 32'h00FF_0000, 1'b0, 32'h00FF_FF00);
+
+        // ADD (unsigned)
+        $write("\tTest Case 3: ADD");
+        test_case(3, 6'h20, 32'h0000_0001, 32'h0000_0001, 1'b0, 32'h0000_0002);
+
+        // SUBTRACT
+        $write("\tTest Case 4: SUBTRACT");
+        test_case(4, 6'h22, 32'h0000_0005, 32'h0000_0003, 1'b0, 32'h0000_0002);
+
+        // LESS THAN (signed)
+        $write("\tTest Case 5: LESS THAN (A < B)");
+        test_case(5, 6'h2A, 32'shFFFF_FFFF, 32'sh0000_0001, 1'b0, 32'h0000_0001); 
+
+        // NOR
+        $write("\tTest Case 6: NOR");
+        test_case(6, 6'h27, 32'hFFFF_0000, 32'h0000_FFFF, 1'b0, 32'h0000_0000); 
 
         // -------------------------------------------------------
         // End testing
